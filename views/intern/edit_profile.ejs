@@ -1,0 +1,200 @@
+<%- include('../includes/intern/Navigation-main'); %>
+
+<!-- main content start -->
+<div class="main-content">
+
+    <!-- content -->
+    <div class="container-fluid content-top-gap">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb my-breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit profile</li>
+            </ol>
+        </nav>
+
+        <!-- chatting -->
+        <div class="data-tables">
+            <div class="row">
+                <div class="col-lg-12 chart-grid mb-4">
+                    <div class="card card_border p-4">
+
+                        <!-- edit profile code starts -->
+
+                        <div class="container bootstrap snippets">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-9">
+                                    <form class="form-horizontal" method="post" action="/edit_profile_data">
+                                        <!--<div class="panel panel-default">-->
+                                        <!--<div class="panel-body text-center">-->
+                                        <!--<img src="../../images/avatar5.jpg" class="img-circle profile-avatar" alt="User avatar" style="height:200px ;width: 200px;">-->
+                                        <!--<div class="mt-2">-->
+                                        <!--<button class="btn btn-primary" type="button">-->
+                                        <!--<i class="fa fa-fw fa-camera"></i>-->
+                                        <!--<span>Change Photo</span>-->
+                                        <!--</button>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+
+                                        <!--<div class="alert alert-warning alert-dismissible fade show" role="alert">-->
+                                        <!--<strong>Holy guacamole!</strong> You should check in on some of those fields below.-->
+                                        <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+                                        <!--<span aria-hidden="true">&times;</span>-->
+                                        <!--</button>-->
+                                        <!--</div>-->
+
+                                        <div class="panel panel-default shadow-lg p-3 mb-5 bg-white rounded">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">Your info</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">First name</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="f_name" class="form-control"
+                                                               value="<%= data.f_name %>">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Last name</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="l_name" class="form-control"
+                                                               value="<%= data.l_name %>">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-auto control-label">Gender</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-control" id="exampleFormControlSelect2"
+                                                                name="gender">
+                                                                <option value="male" <%= data.gender==='male'?'selected':''%>>Male</option>
+                                                                <option value="female" <%= data.gender==='female'?'selected':''%>>Female</option>
+                                                                <option value="Other" <%= data.gender==='other'?'selected':''%>>Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!--<br/>-->
+                                        <div class="panel panel-default shadow-lg p-3 mb-5 bg-white rounded">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">Contact info</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label class="col-sm-auto control-label">Mobile number</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="tel" name="phone" class="form-control"
+                                                               value="<%= data.phone %>">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-auto control-label">E-mail address</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="email" name="email" class="form-control"
+                                                               value="<%= data.email %>" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<br/>-->
+                                        <div class="panel panel-default shadow-lg p-3 mb-5 bg-white rounded">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">Security</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">Current password</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="password" class="form-control"
+                                                               value="<%= data.password %>" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">New password</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="password" name="pass" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <!--<div class="form-group">-->
+                                                    <!--<label class="col-sm-4 control-label">Re-type new password</label>-->
+                                                    <!--<div class="col-sm-10">-->
+                                                        <!--<input type="password" name="re-pass" class="form-control">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+
+                                            </div>
+                                        </div>
+
+                                        <% if(type === 'doctor') { %>
+                                        <div class="panel panel-default shadow-lg p-3 mb-5 bg-white rounded">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">Doctor details</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label class="col-sm-auto control-label">Doctor Categoty</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-control" id="exampleFormControlSelect1"
+                                                                name="category">
+                                                            <% for(let cat of category) { %>
+                                                                <option value="<%= cat.category %>" <%= data.category==cat.category? 'selected':''%> ><%= cat.category %></option>
+                                                            <% } %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-auto control-label">Doctor ID</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="doc_id" class="form-control"
+                                                               value="<%= data.doctor_id %>">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Description</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea rows="3" name="desc"
+                                                                  class="form-control"><%= data.description %></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+
+                                        <div class="panel panel-default ">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-sm-10 col-sm-offset-2">
+                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                        <button type="reset" class="btn btn-default">Clear</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- edit profile code ends -->
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+            <!-- </div>
+           </div> -->
+        </div>
+    </div>
+</div>
+</div>
+<!-- //chatting -->
+
+</div>
+<!-- //content -->
+</div>
+<!-- main content end-->
+</section>
+
+<%- include('../includes/intern/footer'); %>

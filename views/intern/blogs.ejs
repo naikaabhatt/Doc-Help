@@ -1,0 +1,251 @@
+<%- include('../includes/intern/Navigation-main'); %>
+
+<!-- main content start -->
+<div class="main-content">
+   <!-- content -->
+  <div class="container-fluid content-top-gap">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb my-breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">blogs</li>
+    </ol>
+</nav>
+
+
+<!-- statistics data -->
+<div class="statistics">
+  <div class="row">
+      <div class="col-xl-6 pr-xl-2">
+          <div class="row">
+              <div class="col-sm-6 pr-sm-2 statistics-grid">
+                  <div class="card card_border border-primary-top p-4">
+                      <i class="lnr lnr-users"> </i>
+                      <h3 class="text-primary number"><%=tot_user%></h3>
+                      <p class="stat-text">Total Users</p>
+                  </div>
+              </div>
+              <div class="col-sm-6 pl-sm-2 statistics-grid">
+                  <div class="card card_border border-primary-top p-4">
+                      <i class="lnr lnr-plus-circle"> </i>
+                      <h3 class="text-secondary number"><%=tot_docs%></h3>
+                      <p class="stat-text">Total Doctors</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-xl-6 pl-xl-2">
+          <div class="row">
+              <div class="col-sm-6 pr-sm-2 statistics-grid">
+                  <div class="card card_border border-primary-top p-4">
+                      <i class="lnr lnr-cloud-sync"> </i>
+                      <h3 class="text-success number"><%=tot_blogs%></h3>
+                      <p class="stat-text">Total blogs</p>
+                  </div>
+              </div>
+              <div class="col-sm-6 pl-sm-2 statistics-grid">
+                  <div class="card card_border border-primary-top p-4">
+                      <i class="lnr lnr-list"> </i>
+                      <h3 class="text-danger number"><%=type_docs%></h3>
+                      <p class="stat-text">Types of doctors</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- //statistics data -->
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- <h3 class="col-md-8 text shadow-sm p-3 mb-5 bg-white rounded" >Blogs</h3> -->
+    
+    <div class="row  ">
+      <!-- Blog Entries Column -->
+      <div class="col-md-8 shadow-lg p-3 mb-5 bg-white rounded">
+        
+        <!-- Blog image -->
+        
+        <% for(let data of media) {  %>
+      
+        <% if(data.media_type === 'image') { %>
+        <div class="card mb-4 shadow-lg p-3 mb-5 bg-white rounded">
+          <img class="card-img-top" src="../../blog/<%=data.media%>"  alt="<%=data.media%>" name="image">
+          <div class="card-body">
+            <h2 class="card-title"><%= data.media_title %></h2>
+            <p class="card-text"><%= data.media_desc %></p>
+            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#image<%= data.media_id%>">
+              Read More &rarr;
+            </button>
+          </div>
+           <div class="card-footer text-muted">Posted on <%=data.date_time.toISOString().substring(0, 10); %>
+           
+          </div>
+        </div>
+        
+        <% } %>
+
+      
+            <!-- Blog text -->
+            <% if(data.media_type === 'text') { %>
+            <div class="card mb-4 shadow-lg p-3 mb-5 bg-white rounded">
+              
+              <div class="card-body">
+                <h2 class="card-title"><%= data.media_title %></h2>
+                <p class="card-text" name="text"><%= data.media_desc %></p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#text<%= data.media_id%>">
+                  Read More &rarr;
+                </button>
+              </div>
+               <div class="card-footer text-muted"> Posted on <%=data.date_time.toISOString().substring(0, 10); %>
+               
+             
+              </div>
+            </div>
+            <% } %>
+        <!-- Blog video -->
+        <% if(data.media_type === 'video') { %>
+                    
+          <div class="card mb-4 shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="embed-responsive embed-responsive-16by9">
+             <iframe class="embed-responsive-item" src="<%=data.media%>"  name="link1" allowfullscreen></iframe>
+              </div>
+        
+                   
+        <div class="card-body">
+          <h2 class="card-title"><%= data.media_title %></h2>
+          <p class="card-text"><%= data.media_desc %></p>
+            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#video<%= data.media_id%>">
+              Read More &rarr;
+            </button>
+        </div>
+        <div class="card-footer text-muted">
+          Posted on <%= data.date_time.toISOString().substring(0, 10); %> 
+          
+          
+        </div>
+      </div>
+
+
+        <% } %>
+        
+        <% } %>
+       
+      </div>
+    
+       </div>
+  
+
+
+<!-- Modal -->
+<!--video-->
+
+<% for(let data of media) {  %>
+ 
+
+<div class="modal fade" id="video<%= data.media_id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLongTitle"><%= data.media_title %></h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+        <iframe class="embed-responsive-item"src="<%=data.media%>" name="link1" allowfullscreen></iframe>
+      </div>
+        <div class="card-body">
+            
+            <p class="card-text"><%= data.media_desc %></p>
+          </div>
+             
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
+        data-dismiss="modal">Close</button>
+
+              </div>
+    </div>
+  </div>
+</div>
+
+<!--image-->
+
+<div class="modal fade" id="image<%= data.media_id%>" tabindex="-2" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLongTitle"><%= data.media_title %></h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+          <img class="card-img-top" src="../../blog/<%=data.media%>"  alt="<%=data.media%>" name="image">
+          <div class="card-body">
+     
+            <p class="card-text"><%= data.media_desc %></p>
+          </div>
+             
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
+        data-dismiss="modal">Close</button>
+                    </div>
+    </div>
+  </div>
+</div>
+
+<!--for text-->
+
+<div class= "modal fade" id="text<%= data.media_id%>" tabindex="-3" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLongTitle"><%= data.media_title %></h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="card-body">
+             <p class="card-text" name="text"><%= data.media_desc %></p>
+          </div>
+             
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
+        data-dismiss="modal">Close</button>
+              </div>
+              
+    </div>
+  </div>
+</div>
+
+<% } %>
+<style>
+    .modal-dialog {
+      width: 100% !important;
+          
+    }
+     .modal-content {
+      height: auto;
+      min-height: 100%;
+      border-radius: 0;
+    }
+</style>
+
+</div>
+  <!-- /.container -->
+
+  </div>
+ 
+    <!-- //content -->
+</div>
+<!-- main content end-->
+</section>
+
+<%- include('../includes/intern/footer'); %>

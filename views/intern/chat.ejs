@@ -1,0 +1,439 @@
+<%- include('../includes/intern/Navigation-main'); %>
+
+<!-- main content start -->
+<div class="main-content">
+
+    <!-- content -->
+    <div class="container-fluid content-top-gap">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb my-breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Chat</li>
+            </ol>
+        </nav>
+        <!--<div class="welcome-msg pt-3 pb-4">-->
+        <!--<h1>Hi <span class="text-primary">John</span>, Welcome back</h1>-->
+        <!--<p>Very detailed & featured admin.</p>-->
+        <!--</div>-->
+
+        <!-- statistics data -->
+        <div class="statistics">
+            <div class="row">
+                <div class="col-xl-6 pr-xl-2">
+                    <div class="row">
+                        <div class="col-sm-6 pr-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-users"> </i>
+                                <h3 class="text-primary number"><%=tot_user%></h3>
+                                <p class="stat-text">Total Users</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pl-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-plus-circle"> </i>
+                                <h3 class="text-secondary number"><%=tot_docs%></h3>
+                                <p class="stat-text">Total Doctors</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 pl-xl-2">
+                    <div class="row">
+                        <div class="col-sm-6 pr-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-cloud-sync"> </i>
+                                <h3 class="text-success number"><%=tot_blogs%></h3>
+                                <p class="stat-text">Total blogs</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pl-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-list"> </i>
+                                <h3 class="text-danger number"><%=type_docs%></h3>
+                                <p class="stat-text">Types of doctors</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <!-- //statistics data -->
+          
+
+        <% if(report === "success") { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>reported!</strong> person reported successfully Thank you for report.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <%} else if(report === "failed"){ %>
+            <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                <strong>Report error!</strong> Sorry due to some problem we can't report now.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% } %>
+
+
+        <!-- chatting -->
+        <div class="data-tables">
+            <div class="row">
+                <div class="col-lg-12 chart-grid mb-4">
+                    <div class="card card_border p-4">
+                        <% if(stat === 3) { %>
+                            <!--<div class="media mt-3">-->
+                            <div class="alert alert-danger" role="alert">
+                                <span class="alert-link">Oh,no </span> Your account has been blocked by admin.
+                            </div>
+                            <!--</div>-->
+                        <% } else { %>
+                            <div class="card-header chart-grid__header pl-0 pt-0">
+                                Chatting
+                            </div>
+                        <div class="messaging">
+                            <div class="inbox_msg">
+
+
+                                <div class="col-md-auto mesgs">
+                                    <div class="type_msg">
+                                        <div class="alert alert-primary" role="alert">
+                                            <% if(type === "doctor") { %>
+                                                Your Chat with Patients
+                                            <% } else if(type === "admin") { %>
+                                                Your Chat with doctors and user
+                                            <% } else { %>
+                                                Your Chat with doctors
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="inbox_chat">
+
+                                        <% var inde = [];
+                                                for(let dd of chat_his) {
+                                        if(!inde.includes(dd.user_id) && dd.user_id !== sender ){
+                                        %>
+                                            <div class="chat_list">
+                                                <div class="chat_people">
+                                                    <div class="chat_img">
+
+                                                        <% if(dd.image === null){ %>
+                                                            <img src="../../images/<%= dd.gender === 'male' ? 'profile-male.jpg' : 'profile-female.jpeg' %>"
+                                                                 alt="<%= dd.f_name + " " + dd.l_name %>"
+                                                                 class="img-fluid">
+                                                        <% } else { %>
+                                                            <img src="../../images/<%= data.image %>"
+                                                                 alt="<%= data.f_name + " " + data.l_name %>"
+                                                                 class="img-fluid">
+                                                        <% } %>
+                                                    </div>
+                                                    <div class="chat_ib">
+                                                        <%
+                                                            var date1 = new Date(dd.date_time)
+                                                            var date2 = new Date();
+                                                            var diff = Math.abs(date1.getTime() - date2.getTime()) / 3600000;
+                                                            diff = diff.toPrecision(2);
+                                                            if (diff < 0.5)
+                                                                diff = "now"
+                                                            else if (diff > 24) {
+                                                                diff = Math.abs(date1.getTime() - date2.getTime()) / 1000;
+                                                                diff = Math.floor(diff / 86400);
+                                                                //console.log("days 1 : " + day);
+                                                                //diff -= day*86400;
+                                                                //console.log("day " + diff);
+                                                                if (diff > 30) {
+                                                                    diff = Math.abs(date1.getTime() - date2.getTime()) / 1000;
+                                                                    var months = Math.floor(diff / 604800);
+                                                                    // console.log("weeks 1 : " + months);
+                                                                    // diff -= months*86400;
+                                                                    // console.log("weeks " + diff);
+                                                                    // diff = diff.toPrecision(1);
+                                                                    diff = months + " week ago"
+                                                                }
+                                                                else {
+                                                                    // diff = diff.toPrecision(1);
+                                                                    diff = diff + " days ago"
+                                                                }
+
+
+                                                            }
+                                                            else
+                                                                diff = diff + " hours ago"
+                                                        %>
+                                                        <h5><%= dd.f_name + " " + dd.l_name %>
+                                                            <small class="text-info"><%= diff %> </small>
+                                                            <span class="chat_date">
+                                                            <a class="btn btn-success btn-sm"
+                                                               href="/newdoctorChat?old=yes&doc_id=<%= dd.user_id %>">Chat!</a></span>
+                                                        </h5>
+                                                        <p><%= dd.detail %>.</p>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% }
+                                            inde.push(sender);
+                                            inde.push(dd.user_id);
+                                            // if(!inde.includes(dd.recive_id)){
+                                            //     inde.push(dd.recive_id);
+                                            // }
+                                        } %>
+
+                                    </div>
+
+                                </div>
+                                <!--<form method="post" action="/doctorChat">-->
+                                <div class="inbox_people">
+
+
+                                    <form method="post" id="f1" action="/doctorChat">
+                                        <div class="headind_srch">
+                                            <div class="srch_bar">
+                                                <div class="stylish-input-group">
+                                                    <% if(type === "doctor") { %>
+                                                        <input type="text" class="search-bar" id="ser" name="search_btn"
+                                                               placeholder="Search patients by name">
+                                                    <% } else { %>
+                                                        <input type="text" class="search-bar" id="ser" name="search_btn"
+                                                               placeholder="Search Doctor or fields of doctor">
+                                                    <% } %>
+
+                                                    <span class="input-group-addon">
+                                                        <button type="button" id="btn"> <i class="fa fa-search"
+                                                                                           aria-hidden="true"></i> </button>
+                                                </span>
+                                                    <script type="text/javascript">
+                                                        document.getElementById('btn').onclick = function () {
+                                                            console.log('in');
+                                                            document.getElementById("f1").submit();
+                                                        }
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div class="inbox_chat">
+
+                                        <%
+                                        if(doc_list.length === 0) { %>
+                                            <div class="chat_list">
+                                                <div class="chat_people">
+                                                    <h5>
+                                                        <% if(type === "doctor" && home === 'search') { %>
+                                                            <span class="badge badge-pill badge-completed">no record found, try to search using email ID.</span>
+                                                        <% }
+                                                        else if(type === "doctor") { %>
+                                                            <span class="badge badge-pill badge-dark">Sorry, no new patients available.</span>
+                                                        <% }
+                                                        else if(type === "admin" && extra.length === 0) { %>
+                                                            <span class="badge badge-pill badge-dark">no record found, try to search using email ID.</span>
+                                                        <% }
+                                                        else if(type === "admin" && extra.length !== 0) { %>
+                                                            <span></span>
+                                                        <% }
+                                                        else if(type !== "doctor" && home === 'search' && type !== "admin") { %>
+                                                            <span class="badge badge-pill badge-completed">no record found, try to search using email ID.</span>
+                                                        <% }
+
+                                                        else { %>
+                                                            <span class="badge badge-pill badge-dark">Sorry, no new doctors available.</span>
+                                                        <% } %>
+
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        <% } %>
+                                        <script type="text/javascript">
+                                            let dt1 = <%= doc_list.length %>;
+                                            if (dt1 === 0 && <% home !== 'search' %>)
+                                                document.getElementById('ser').disabled = true;
+                                        </script>
+                                        <% for(let data of doc_list) { %>
+                                            <div class="chat_list">
+                                                <div class="chat_people">
+                                                    <div class="chat_img">
+                                                        <% if(data.image === null){ %>
+                                                            <img src="../../images/<%= data.gender === 'male' ? 'profile-male.jpg' : 'profile-female.jpeg' %>"
+                                                                 alt="<%= data.f_name + " " + data.l_name %>"
+                                                                 class="img-fluid">
+                                                        <% } else { %>
+                                                            <img src="../../images/<%= data.image %>"
+                                                                 alt="<%= data.f_name + " " + data.l_name %>"
+                                                                 class="img-fluid">
+                                                        <% } %>
+                                                    </div>
+                                                    <div class="chat_ib">
+                                                        <h5><%= data.f_name + " " + data.l_name %> <span
+                                                                    class="badge badge-pill badge-info"><%= data.category %></span>
+                                                        </h5>
+                                                        <!--<p></p>-->
+                                                        <button type="button" class="btn btn-dark btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#chatModal<%= data.user_id %>"> more Info
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--<form action="/newdoctorChat" id="f2" method="post">-->
+                                            <div class="modal fade" id="chatModal<%= data.user_id %>" tabindex="-1"
+                                                 role="dialog" aria-labelledby="chatModalLabel<%= data.user_id %>"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title"
+                                                                id="chatModalLabel<%= data.user_id %>"><%= data.doctor_id %></h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="media">
+
+                                                                <% if(data.image === null){ %>
+                                                                    <img src="../../images/<%= data.gender === 'male' ? 'profile-male.jpg' : 'profile-female.jpeg' %>"
+                                                                         alt="<%= data.f_name + " " + data.l_name %>"
+                                                                         class="align-self-start mr-3"
+                                                                         style="width:100px;height: 100px">
+                                                                <% } else { %>
+                                                                    <img src="../../images/<%= data.image %>"
+                                                                         alt="<%= data.f_name + " " + data.l_name %>"
+                                                                         class="align-self-start mr-3"
+                                                                         style="width:100px;height: 100px">
+                                                                <% } %>
+                                                                <div class="media-body">
+                                                                    <h5 class="mt-0"><%= data.f_name + " " + data.l_name %></h5>
+                                                                    <p> <%= data.description %> </p>
+                                                                    <% if(type === "doctor") { %>
+                                                                        <p><%= data.gender %></p>
+                                                                        <p><%= data.email %></p>
+                                                                    <% } %>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <a class="btn btn-success"
+                                                               href="/newdoctorChat?uid=<%= data.user_id %>">Start New
+                                                                Chat
+                                                            </a>
+                                                            <button type="button" class="btn btn-primary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--</form>-->
+                                        <% } %>
+
+                                        <% if(type == 'admin') {for(let data of extra) { %>
+                                            <div class="chat_list">
+                                                <div class="chat_people">
+                                                    <div class="chat_img">
+                                                        <% if(data.image === null){ %>
+                                                            <img src="../../images/<%= data.gender === 'male' ? 'profile-male.jpg' : 'profile-female.jpeg' %>"
+                                                                 alt="<%= data.f_name + " " + data.l_name %>"
+                                                                 class="img-fluid">
+                                                        <% } else { %>
+                                                            <img src="../../images/<%= data.image %>"
+                                                                 alt="<%= data.f_name + " " + data.l_name %>"
+                                                                 class="img-fluid">
+                                                        <% } %>
+                                                    </div>
+                                                    <div class="chat_ib">
+                                                        <h5><%= data.f_name + " " + data.l_name %> <span
+                                                                    class="badge badge-pill badge-info"><%= data.category %></span>
+                                                        </h5>
+                                                        <!--<p></p>-->
+                                                        <button type="button" class="btn btn-dark btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#chatModal<%= data.user_id %>"> more Info
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--<form action="/newdoctorChat" id="f2" method="post">-->
+                                            <div class="modal fade" id="chatModal<%= data.user_id %>" tabindex="-1"
+                                                 role="dialog" aria-labelledby="chatModalLabel<%= data.user_id %>"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title"
+                                                                id="chatModalLabel<%= data.user_id %>"><%= data.doctor_id %></h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="media">
+
+                                                                <% if(data.image === null){ %>
+                                                                    <img src="../../images/<%= data.gender === 'male' ? 'profile-male.jpg' : 'profile-female.jpeg' %>"
+                                                                         alt="<%= data.f_name + " " + data.l_name %>"
+                                                                         class="align-self-start mr-3"
+                                                                         style="width:100px;height: 100px">
+                                                                <% } else { %>
+                                                                    <img src="../../images/<%= data.image %>"
+                                                                         alt="<%= data.f_name + " " + data.l_name %>"
+                                                                         class="align-self-start mr-3"
+                                                                         style="width:100px;height: 100px">
+                                                                <% } %>
+                                                                <div class="media-body">
+                                                                    <h5 class="mt-0"><%= data.f_name + " " + data.l_name %></h5>
+                                                                    <p> <%= data.description %> </p>
+                                                                    <% if(type === "doctor") { %>
+                                                                        <p><%= data.gender %></p>
+                                                                        <p><%= data.email %></p>
+                                                                    <% } %>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <a class="btn btn-success"
+                                                               href="/newdoctorChat?uid=<%= data.user_id %>">Start New
+                                                                Chat
+                                                            </a>
+                                                            <button type="button" class="btn btn-primary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--</form>-->
+                                        <% }} %>
+
+                                    </div>
+                                    <!--</form>-->
+                                </div>
+
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- //chatting -->
+
+    </div>
+    <!-- //content -->
+</div>
+<!-- main content end-->
+</section>
+
+<%- include('../includes/intern/footer'); %>

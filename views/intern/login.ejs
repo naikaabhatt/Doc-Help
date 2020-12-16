@@ -1,0 +1,89 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>DocHLp</title>
+ <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="doctor patient mental health">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta-Tags -->
+
+	<!-- css files -->
+	<link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+	<link href="../../css/login-register.css" rel="stylesheet" type="text/css" media="all"/>
+	<!-- //css files -->
+
+	<!-- google fonts -->
+	<link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	<!-- //google fonts -->
+
+</head>
+<body>
+
+<div class="signupform">
+	<div class="container">
+		<!-- main content -->
+		<div class="agile_info">
+			<div class="w3l_form">
+				<div class="left_grid_info">
+					<h2 class="logo-2 mb-lg-4 mb-3">
+						<a href="/" style="font-size: 35px;">D<span
+								style="font-family: 'Apple Color Emoji','Century Schoolbook','Times New Roman'">oc</span>HL<span
+								style="font-family: 'Apple Color Emoji','Century Schoolbook','Times New Roman'">p</span></a>
+					</h2>
+					<p>A platform where you can get all your questions regarding mental health answered by authorised psychologist and psychiatrist. Get professional advice, chat with doctors and follow their suggestions to improve your mental health!</p>
+					<img src="../../images/doctor2.jpg" alt="" />
+				</div>
+			</div>
+			<div class="w3_info">
+				<h2>Login to your Account</h2>
+				<% if(errormessage) { %>
+				<p class="text-danger" style="color: red"><%=errormessage%>.</p>
+				<% } else { %>
+				<p>Enter your details to login.</p>
+				<% } %>
+				<form action="/login" method="post">
+					<label>Email Address</label>
+					<div class="input-group">
+						<span class="fa fa-envelope" aria-hidden="true"></span>
+						<input type="text" name="email" placeholder="Enter Your Email Or Phone Number" required="">
+					</div>
+					<label>Password</label>
+					<div class="input-group">
+						<span class="fa fa-lock" aria-hidden="true"></span>
+						<input type="Password" name="pass" placeholder="Enter Password" required="">
+					</div>
+					
+						<button class="btn btn-danger btn-block" name="login" type="submit">Login</button >
+				</form>
+				<p class="account">By clicking login, you agree to our <a href="#">Terms & Conditions!</a></p>
+				<p class="account1">Don't have an account? <a href="/register">Register here</a></p>
+				<p class="account1">Forgot tour password ? <a href="/forgot-pass">click here</a></p>
+			</div>
+		</div>
+		<!-- //main content -->
+	</div>
+	<!-- footer -->
+	<div class="footer">
+		<p>&copy; 2020 DocHLp | Design by Archi, Zain and Naika </p>
+	</div>
+	<!-- footer -->
+</div>
+
+</body>
+</html>

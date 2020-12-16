@@ -1,0 +1,92 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>DocHLp</title>
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="../../css/style-starter.css">
+
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900&display=swap" rel="stylesheet">
+</head>
+
+<body class="sidebar-menu-collapsed">
+<div class="se-pre-con"></div>
+<section>
+    <!-- sidebar menu start -->
+    <div class="sidebar-menu sticky-sidebar-menu">
+
+        <!-- logo start -->
+        <div class="logo">
+            <h1><a href="/">Collective</a></h1>
+        </div>
+
+        <!-- if logo is image enable this -->
+        <!--image logo -->
+        <!-- <div class="logo">-->
+        <!--<a href="index.html">-->
+        <!--<img src="../../images/avatar1.jpg" alt="Your logo" title="Your logo" class="img-fluid" style="height:35px;" />-->
+        <!--</a> -->
+        <!--</div> -->
+        <!-- //image logo -->
+
+
+        <div class="logo-icon text-center">
+            <a href="/" title="logo">
+                <img src="../../images/logo.png" alt="logo-icon"> 
+                <!-- <span class="fa fa-home"></span> -->
+            </a>
+        </div>
+        <!-- //logo end -->
+
+        <div class="sidebar-menu-inner">
+
+            <!-- sidebar nav start -->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <!-- <li class="<%=page=='index'?'active':''%>"><a href="/"><i class="fa fa-home"></i><span> Home</span></a>
+                </li> -->
+                <!--<li class="menu-list">-->
+                    <!--<a href="#"><i class="fa fa-cogs"></i>-->
+                        <!--<span>Elements <i class="lnr lnr-chevron-right"></i></span></a>-->
+                    <!--<ul class="sub-menu-list">-->
+                        <!--<li><a href="carousels.html">Carousels</a> </li>-->
+                        <!--<li><a href="cards.html">Default cards</a> </li>-->
+                        <!--<li><a href="people.html">People cards</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <li class="<%=page=='chat'?'active':'' || page==='chatDoctor'?'active':''%>"><a href="/chat"><i class="fa fa-comment"></i> <span>Chat</span></a></li>
+                <li class="<%=page=='question'?'active':''%>"><a href="/question"><i class="fa fa-question"></i> <span>Questions Balcony</span></a></li>
+                <% if(type==='admin') { %>
+                <li class="<%=page==='users'?'active':''%>"><a href="/users"><i class="fa fa-user-times"></i> <span>Manage User</span></a></li>
+                <li class="<%=page==='doctors'?'active':''%>"><a href="/doctors"><i class="fa fa-user-md"></i> <span>Manage Doctors</span></a></li>
+                <% } %>
+                <% if(type==='doctor' || type==='admin') { %>
+                <li class="<%=page==='add_blogs'?'active':''%>"><a href="/blogs/add_blogs"><i class="fa fa-quote-left"></i> <span>Add blog</span></a></li>
+                <% } %>
+                <li class="<%=page==='blogs'?'active':''%>"><a href="/blogs"><i class="fa fa-align-left"></i> <span>blog</span></a></li>
+                <% if(type==='admin' || type==='doctor') { %>
+                <li class="<%=page==='update_blog'?'active':''%>"><a href="/blog_update"><i class="fa fa-spinner"></i> <span>Update blog</span></a></li>
+                <% } %>
+                <!--<li><a href="forms.html"><i class="fa fa-file-text"></i> <span>Forms</span></a></li>-->
+            </ul>
+            <!-- //sidebar nav end -->
+            <!-- toggle button start -->
+            <a class="toggle-btn">
+                <i class="fa fa-angle-double-left menu-collapsed__left"><span>Collapse Sidebar</span></i>
+                <i class="fa fa-angle-double-right menu-collapsed__right"></i>
+            </a>
+            <!-- //toggle button end -->
+        </div>
+    </div>
+    <!-- //sidebar menu end -->
+
+<%- include('profile'); %>

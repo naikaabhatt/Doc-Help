@@ -1,0 +1,10 @@
+ALTER TABLE `internship`.`questions` ADD FULLTEXT  (`title`,`question_category`,`question_detail`);
+
+ALTER TABLE `internship`.`user` ADD FULLTEXT (f_name,l_name,email)
+
+How query will work : 
+SELECT * FROM questions p1 WHERE MATCH(p1.title,p1.question_category,p1.question_detail) AGAINST ('taav')
+
+USER SEARCH ::
+WHERE MATCH(p1.f_name,p1.l_name,p1.email) AGAINST (?)
+// replace ? with your search data.

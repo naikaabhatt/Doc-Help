@@ -1,0 +1,100 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Forgot Password</title>
+    <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords"
+          content="Business Login Form a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta-Tags -->
+
+    <!-- css files -->
+    <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../../css/login-register.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- //css files -->
+
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- //google fonts -->
+
+</head>
+<body>
+
+<div class="signupform">
+    <div class="container">
+        <!-- main content -->
+        <div class="agile_info">
+            <div class="w3l_form">
+                <div class="left_grid_info">
+                    <h2 class="logo-2 mb-lg-4 mb-3">
+                        <a href="/">D<span
+                                    style="font-family: 'Apple Color Emoji','Century Schoolbook','Times New Roman'">octot</span>
+                            P<span
+                                    style="font-family: 'Apple Color Emoji','Century Schoolbook','Times New Roman'">atient</span></a>
+                    </h2>
+                    <p>information.</p>
+                    <img src="../../images/admin.jpg" alt=""/>
+                </div>
+            </div>
+            <div class="w3_info">
+                <h2>Forgot your Password ?</h2>
+
+                <% if(sucess==="yes") { %>
+                    <br/><strong style="color: green">Check your email for password</strong>
+                <% }
+                else if(sucess==="no") { %>
+                    <br/><strong style="color: red">Sorry out mail service is not working ! Try later</strong>
+                <% } %>
+
+                <% if(errormessage) { %>
+                <p class="text-danger" style="color: red"><%= errormessage %>.</p>
+                <% } else { %>
+                    <p>Enter your details .</p>
+                <% } %>
+                <form action="/forgot-pass" method="post">
+                    <label>Email Address</label>
+                    <div class="input-group">
+                        <span class="fa fa-envelope" aria-hidden="true"></span>
+                        <input type="text" name="email" placeholder="Enter Your Email" required="">
+                    </div>
+                    <label>Phone Number</label>
+                    <div class="input-group">
+                        <span class="fa fa-mobile-phone" aria-hidden="true"></span>
+                        <input type="Password" name="phone" placeholder="Enter Phone number" required="">
+                    </div>
+
+                    <button class="btn btn-danger btn-block" type="submit">Submit</button>
+                </form>
+                <p class="account">By clicking login, you agree to our <a href="#">Terms & Conditions!</a></p>
+                <p class="account1">Don't have an account? <a href="/register">Register here</a></p>
+            </div>
+        </div>
+        <!-- //main content -->
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <p>&copy; 2019 Business login form. All Rights Reserved | Design by <a href="https://w3layouts.com/"
+                                                                               target="blank">W3layouts</a></p>
+    </div>
+    <!-- footer -->
+</div>
+
+</body>
+</html>

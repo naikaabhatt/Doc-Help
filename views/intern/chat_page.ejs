@@ -1,0 +1,277 @@
+<%- include('../includes/intern/Navigation-main'); %>
+
+<!-- main content start -->
+<div class="main-content">
+
+    <!-- content -->
+    <div class="container-fluid content-top-gap">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb my-breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/chat">Chat</a></li>
+                <li class="breadcrumb-item active"
+                    aria-current="page"><%= type === 'doctor' ? 'Chat With Patient' : 'Chat With Doctor' %></li>
+            </ol>
+        </nav>
+        <!--<div class="welcome-msg pt-3 pb-4">-->
+        <!--<h1>Hi <span class="text-primary">John</span>, Welcome back</h1>-->
+        <!--<p>Very detailed & featured admin.</p>-->
+        <!--</div>-->
+
+        <!-- statistics data -->
+        <div class="statistics">
+            <div class="row">
+                <div class="col-xl-6 pr-xl-2">
+                    <div class="row">
+                        <div class="col-sm-6 pr-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-users"> </i>
+                                <h3 class="text-primary number"><%=tot_user%></h3>
+                                <p class="stat-text">Total Users</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pl-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-plus-circle"> </i>
+                                <h3 class="text-secondary number"><%=tot_docs%></h3>
+                                <p class="stat-text">Total Doctors</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 pl-xl-2">
+                    <div class="row">
+                        <div class="col-sm-6 pr-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-cloud-sync"> </i>
+                                <h3 class="text-success number"><%=tot_blogs%></h3>
+                                <p class="stat-text">Total blogs</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pl-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-list"> </i>
+                                <h3 class="text-danger number"><%=type_docs%></h3>
+                                <p class="stat-text">Types of doctors</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <!-- //statistics data -->
+          
+
+        <% if(stat === 3) { %>
+            <!--<div class="media mt-3">-->
+            <div class="data-tables">
+                <div class="row ">
+                    <div class="col-lg-12 chart-grid mb-4" style="margin-bottom: 10px !important;">
+                        <div class="card card_border p-4">
+                            <div class="alert alert-danger" role="alert">
+                                <span class="alert-link">Oh,no </span> Your account has been blocked by admin.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--</div>-->
+        <% } else { %>
+            <div class="alert alert-warning" role="alert">
+                Don't Share your personal information like address or phone number.
+            </div>
+
+            <!-- chatting -->
+            <div class="data-tables">
+                <div class="row ">
+                    <div class="col-lg-12 chart-grid mb-4" style="margin-bottom: 10px !important;">
+                        <div class="card card_border p-4">
+                            <div class="card-header chart-grid__header pl-0 pt-0" style="border-bottom: 0;padding: 0;">
+                                <!--Chatting-->
+                                <div class="input-group col-lg-12">
+                                    <div class="input-group-prepend col-11">
+                                        <div class="media ">
+                                            <!--<img src="../../images/avatar1.jpg" class="" alt="...">-->
+                                            <% if(doc_detail.length === 0) { %>
+                                                <img src="../../images/<%= tempo[0].gender === 'male' ? 'profile-male.jpg' : 'profile-female.jpeg' %>"
+                                                     alt="<%= tempo[0].f_name + " " + tempo[0].l_name %>"
+                                                     class="align-self-start mr-3" style="height: 100px;width: 100px">
+                                            <% }else if(doc_detail[0].image === null){ %>
+                                                <img src="../../images/<%= doc_detail[0].gender === 'male' ? 'profile-male.jpg' : 'profile-female.jpeg' %>"
+                                                     alt="Dr. <%= doc_detail[0].f_name + " " + doc_detail[0].l_name %>"
+                                                     class="align-self-start mr-3" style="height: 100px;width: 100px">
+                                            <% } else { %>
+                                                <img src="../../images/<%= doc_detail[0].image %>"
+                                                     alt="<%= doc_detail[0].f_name + " " + doc_detail[0].l_name %>"
+                                                     class="align-self-start mr-3" style="height: 100px;width: 100px">
+                                            <% } %>
+                                            <div class="media-body col-sm-auto">
+                                                <% if(doc_detail.length === 0) { %>
+                                                    <h5 class="mt-0">
+                                                         <%= tempo[0].f_name + " " + tempo[0].l_name %>
+                                                    </h5>
+                                                    <p><%= 'Gender: ' + tempo[0].gender %></p>
+                                                    <% var dob = new Date(tempo[0].dob); %>
+                                                    <p><%= 'DOB: ' + dob.toDateString() %></p>
+                                                    <p><%= 'Email: ' + tempo[0].email %></p>
+
+                                                <% } else if(type === "admin") { %>
+                                                    <h5 class="mt-0">
+                                                        User <%= doc_detail[0].f_name + " " + doc_detail[0].l_name %>
+                                                    </h5>
+                                                    <p><%= 'Gender: ' + doc_detail[0].gender %></p>
+                                                    <% var dob = new Date(doc_detail[0].dob); %>
+                                                    <p><%= 'DOB: ' + dob.toDateString() %></p>
+                                                    <p><%= 'Email: ' + doc_detail[0].email %></p>
+
+                                                <% } else { console.log(doc_detail.length) %>
+                                                <h5 class="mt-0"> <%= type === 'doctor' ? '' : 'Dr. ' %> <%= doc_detail[0].f_name + " " + doc_detail[0].l_name %>
+                                                    (<%= type === 'doctor' ? 'Patient' : doc_detail[0].doctor_id %>
+                                                    ) </h5>
+                                                <p><%= type === 'doctor' ? 'Gender: ' + doc_detail[0].gender : '' %></p>
+                                                <% var dob = new Date(doc_detail[0].dob); %>
+                                                <p><%= type === 'doctor' ? 'DOB: ' + dob.toDateString() : '' %></p>
+                                                <p><%= type === 'doctor' ? 'Email: ' + doc_detail[0].email : '' %></p>
+                                                <!--<small class="text-info"></small>-->
+                                                <span class="badge badge-pill badge-primary"><%= doc_detail[0].category %></span>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% if(doc_detail.length !== 0) { %>
+                                    <div class="col-sm-auto flex-row-reverse ">
+                                        <button type="button" data-toggle="modal" data-target="#exampleModal"
+                                                class="btn btn-sm btn-warning">Report
+                                        </button>
+                                    </div>
+                                    <% } %>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <% if(doc_detail.length!==0) {%>
+                        <form method="post" action="/report-doctor">
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Tell us why:</label>
+                                    <textarea class="form-control" name="message" id="message-text"></textarea>
+                                    <input type="text" name="doc_id" value="<%= doc_detail[0].user_id %>" hidden>
+                                    <input type="text" name="doc_email" value="<%= doc_detail[0].email %>" hidden>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Send message</button>
+                            </div>
+                        </form>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 chart-grid mb-4">
+                    <div class="card card_border p-4 pre-scrollable">
+
+                        <a href="#end" class="float-right d-flex justify-content-end text-success"
+                           title="Goto end"><span class="fa fa-angle-down"></span></a>
+
+                        <% var dt1;
+                            var data2 = 0;
+                            var inde = [];
+                                for(let dd of chats) {
+                            var dd1 = new Date(dd.date_time);
+                            dt1 = new Date(dd.date_time)
+                            dt1 = dt1.getDate();
+                        if(!inde.includes(dt1)) {
+                        %>
+                            <span class="badge badge-light"
+                                  style="font-size: smaller"><%= dd1.getDate() + "/" + dd1.getMonth() + "/" + dd1.getFullYear() %></span>
+                            <div style="padding: 10px"></div>
+                        <% } %>
+                        <% if(dd.sender_id === user) { %>
+                            <!-- user -->
+                            <div class="media col-10">
+                                <div class="col-auto border border-dark" style="border-radius: 0 10px 10px 10px">
+                                    <div class="media-body ">
+                                        <%= dd.detail %>
+                                    </div>
+                                    <small class="float-right"><span class="badge badge-light"
+                                                                     style="font-size: smaller"><span
+                                                    class="fa fa-clock-o"></span><%= dd1.getHours() + ":" + dd1.getMinutes() %></span>
+                                    </small>
+                                </div>
+                            </div>
+                            <!-- user end -->
+
+                            <div style="padding: 10px"></div>
+                        <% } else { %>
+                            <!-- doctor -->
+                            <div class="media d-flex flex-row-reverse" style="margin-left: 10%">
+                                <div class="col-auto border border-info" style="border-radius: 10px 0 10px 10px">
+                                    <div class="media-body ">
+                                        <!--<h5 class="mt-0 mb-1">Media object</h5>-->
+                                        <%= dd.detail %>
+                                    </div>
+                                    <small class="float-right "><span class="badge badge-light"
+                                                                      style="font-size: smaller"><span
+                                                    class="fa fa-clock-o"></span><%= dd1.getHours() + ":" + dd1.getMinutes() %></span>
+                                    </small>
+                                </div>
+                            </div>
+                            <div style="padding: 10px"></div>
+                            <!-- doctor end -->
+                        <% } data2 = new Date(dd.date_time)
+                            data2 = data2.getDate();
+                            inde.push(data2); } %>
+
+                        <!-- pass with #end id so stay always at end-->
+                        <span id="end"></span>
+                    </div>
+                    <br/>
+                    <form method="post" action="/chat-message">
+                        <div class="input-group col-8">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text text-success" id="btnGroupAddon">
+                                    <button type="submit" class="btn btn-sm btn-outline-success fa fa-send"></button>
+                                </div>
+                            </div>
+                            <% if(doc_detail.length===0) { %>
+                            <input type="text" name="doc_id" value="<%= tempo[0].user_id %>" hidden>
+                            <% } else {%>
+                            <input type="text" name="doc_id" value="<%= doc_detail[0].user_id %>" hidden>
+                                    <%}%>
+                            <input type="text" class="form-control" name="chatdata" placeholder="Enter Your Chat"
+                                   aria-label="Input group example" aria-describedby="btnGroupAddon">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <% } %>
+
+    </div>
+
+</div>
+<!-- //content -->
+</div>
+<!-- main content end-->
+</section>
+
+<%- include('../includes/intern/footer'); %>

@@ -1,0 +1,283 @@
+<%- include('../includes/intern/Navigation-main'); %>
+
+<!-- main content start -->
+<div class="main-content">
+
+    <!-- content -->
+    <div class="container-fluid content-top-gap">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb my-breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Questions</li>
+            </ol>
+        </nav>
+        <!--<div class="welcome-msg pt-3 pb-4">-->
+        <!--<h1>Hi <span class="text-primary">John</span>, Welcome back</h1>-->
+        <!--<p>Very detailed & featured admin.</p>-->
+        <!--</div>-->
+        <div class="welcome-msg pt-3 pb-4">
+            <h1>Hi <span class="text-primary"><%=name%></span>, Welcome back</h1>
+            <!--<p>Very detailed & featured admin.</p>-->
+          </div>
+          
+        <!-- statistics data -->
+        <div class="statistics">
+            <div class="row">
+                <div class="col-xl-6 pr-xl-2">
+                    <div class="row">
+                        <div class="col-sm-6 pr-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-users"> </i>
+                                <h3 class="text-primary number"><%=tot_user%></h3>
+                                <p class="stat-text">Total Users</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pl-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-plus-circle"> </i>
+                                <h3 class="text-secondary number"><%=tot_docs%></h3>
+                                <p class="stat-text">Total Doctors</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 pl-xl-2">
+                    <div class="row">
+                        <div class="col-sm-6 pr-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-cloud-sync"> </i>
+                                <h3 class="text-success number"><%=tot_blogs%></h3>
+                                <p class="stat-text">Total blogs</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 pl-sm-2 statistics-grid">
+                            <div class="card card_border border-primary-top p-4">
+                                <i class="lnr lnr-list"> </i>
+                                <h3 class="text-danger number"><%=type_docs%></h3>
+                                <p class="stat-text">Types of doctors</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <!-- //statistics data -->
+          
+        <!-- chatting -->
+        <div class="data-tables">
+            <div class="row">
+                <div class="col-lg-12 chart-grid mb-4">
+                    <div class="card card_border p-4">
+                        <% if(stat===3) { %>
+                            <!--<div class="media mt-3">-->
+                                <div class="alert alert-danger" role="alert">
+                                    <span class="alert-link">Oh,no </span> Your account has been blocked by admin.
+                                </div>
+                            <!--</div>-->
+                        <%} else {%>
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#exampleModalCenter">
+                            You Want To Ask A New Question <span class="fa fa-question"></span>
+                        </button>
+                                <% } %>
+
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Your Question</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" action="/questionData">
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Your Title </label>
+                                                <input type="text" class="form-control"
+                                                       placeholder="Ex. COVID-19 safety information"
+                                                       id="exampleFormControlInput1" name="title" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">What you want to ask <span
+                                                            class="fa fa-question"></span></label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                          name="detail"
+                                                          rows="2" required></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Select Doctor category</label>
+                                                <select class="form-control" id="exampleFormControlSelect1"
+                                                        name="category">
+                                                    <% for(let cat of category) { %>
+                                                        <option value="<%= cat.category %>"><%= cat.category %></option>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                            <div class="form-group form-check">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                                       name="name">
+                                                <label class="form-check-label" for="exampleCheck1">Don't show my
+                                                    name</label>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<br/>-->
+                        <!--<br/>-->
+                        <!--<div class="dropdown-divider"></div>-->
+                        <h3 class="text text-lg-center" >Question Balcony</h3>
+
+                        <form class="form-inline col-lg-auto my-auto" style="margin-top: 3%;z-index: 1" method="post" action="/search_ques">
+                            <input class="form-control col-auto mr-sm-2" type="text"
+                                   placeholder="Search question or category" name="searchData" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                        <div style="margin-top: 3%"></div>
+
+                        <% for(let dd of ques) { %>
+                            <form class="media shadow-lg p-3 mb-5 bg-white rounded" method="post" action="/answer">
+
+                                <span class="mr-3 font-weight-bold">Q</span>
+                                <div class="media-body">
+                                    <h5 class="mt-0"><%= dd.title %> <span
+                                                class="badge badge-pill badge-dark"><%= dd.question_category %></span>
+                                        <span class="badge badge-pill badge-secondary">New</span>
+                                        <button type="button" class="btn btn-sm text-sm-center font-weight-bold"
+                                                data-toggle="modal" data-target="<%= dd.q_stat === 0 ? '#exampleBy'+dd.user_id: '' %>">
+                                            <small>
+                                                By <%= dd.q_stat === 0 ? dd.f_name + " " + dd.l_name : 'Unknown' %></small>
+                                        </button>
+                                    </h5>
+                                    <p class="text-break font-weight-bolder"><%= dd.question_detail %></p>
+
+                                    <% for(let aa of ans) { %>
+                                        <% if(dd.question_id == aa.question_id) {
+                                        %>
+                                        <div class="media mt-3">
+                                            <a class="mr-3" href="#">
+                                                <span class="mr-3 font-weight-bold">A</span>
+                                            </a>
+                                            <div class="media-body">
+                                                <h5 class="mt-0">
+                                                    <button type="button" class="badge badge-pill badge-info"
+                                                            data-toggle="modal"
+                                                            data-target="#exampleDr<%= aa.doc_id %>">
+                                                        Dr. <%= aa.doc_f_name + " " + aa.doc_l_name %></button>
+                                                    <span class="badge badge-pill badge-dark"><%= aa.category %></span>
+                                                </h5>
+                                                <p class="text-break"><%= aa.answer_detail %></p>
+                                            </div>
+                                        </div>
+                                    <% } } %>
+
+                                    <!-- this is available only for doctors-->
+                                    <% if(type === 'doctor' && stat!=3) { %>
+                                        <div class="media mt-3">
+                                            <!--<a class="mr-3" href="#">-->
+                                                <!--<span class="mr-3 font-weight-bold">Hello</span>-->
+                                            <!--</a>-->
+                                            <div class="media-body">
+                                                <h5 class="mt-0 font-italic">You want to answer ?</h5>
+                                                <div class="form-group">
+                                            <textarea class="form-control" name="ans" id="exampleFormControlTextarea1"
+                                                      rows="2" required ></textarea>
+                                                    <input type="text" name="qid" value="<%= dd.question_id %>" hidden>
+                                                    <button type="submit" class="btn btn-sm btn-outline-success">
+                                                        submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } if(stat===3) { %>
+                                    <div class="media mt-3">
+                                        <div class="alert alert-danger" role="alert">
+                                            <span class="alert-link">Sorry </span> your no longer able to help users.
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                </div>
+
+                                <% for(let aa of ans) { %>
+                                    <% if(dd.question_id == aa.question_id) {
+                                    %>
+                                        <div class="modal fade" id="exampleDr<%= aa.doc_id %>" tabindex="-1"
+                                             role="dialog"
+                                             aria-labelledby="exampleDr<%= aa.doc_id %>Title" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleDr<%= aa.doc_id %>Title">
+                                                            Dr. <%= aa.doc_f_name + " " + aa.doc_l_name %></h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p class="text-danger"><%= aa.doc_status === 0 ? 'Not Authenticated' : '' %></p>
+                                                        <p>Doctor Id: <%= aa.doctor_id %></p>
+                                                        <p>Speciality: <%= aa.category %></p>
+                                                        <p>Email: <%= aa.doc_email %></p>
+                                                        <p>Gender: <%= aa.doc_gender %></p>
+                                                        <p>About: <%= aa.description %></p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger"
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                <% }} %>
+
+                                <div class="modal fade" id="exampleBy<%= dd.user_id %>" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleBy<%= dd.user_id %>" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title"
+                                                    id="exampleBy<%= dd.user_id %>Title"> <%= dd.f_name + " " + dd.l_name %> </h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Email: <%= dd.email %></p>
+                                                <p>Gender: <%= dd.gender %></p>
+                                                <p>DOB: <%= dd.dob %></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //content -->
+</div>
+<!-- main content end-->
+</section>
+
+<%- include('../includes/intern/footer'); %>

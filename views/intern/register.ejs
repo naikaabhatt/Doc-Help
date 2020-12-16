@@ -1,0 +1,251 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DocHLp</title>
+    <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords"
+          content="Business Login Form a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta-Tags -->
+
+    <!-- css files -->
+    <link href="../../css/style-starter.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../../css/login-register.css" rel="stylesheet" type="text/css" media="all"/>
+
+    <!-- //css files -->
+
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- //google fonts -->
+
+</head>
+<body>
+
+<div class="signupform">
+    <div class="container">
+        <!-- main content -->
+        <div class="agile_info">
+            <div class="w3l_form">
+                <div class="left_grid_info">
+                    <h2 class="logo-2 mb-lg-4 mb-3">
+						<a href="/" style="font-size: 35px;">D<span
+								style="font-family: 'Apple Color Emoji','Century Schoolbook','Times New Roman'">oc</span>HL<span
+								style="font-family: 'Apple Color Emoji','Century Schoolbook','Times New Roman'">p</span></a>
+					</h2>
+					<p>A platform where you can get all your questions regarding mental health answered by authorised psychologist and psychiatrist. Get professional advice, chat with doctors and follow their suggestions to improve your mental health!</p>
+                    <img src="../../images/doctor3.jpg" alt=""/>
+                </div>
+            </div>
+            <div class="w3_info">
+                <h2>Registration Form</h2>
+                <% if(errormessage) { %>
+                    <p class="text-danger"><%= errormessage %>.</p>
+                <% } else { %>
+                <p>Enter your details to register.</p>
+                    <% } %>
+                <form action="/registration" method="post">
+
+                    <div class="col-sm-auto form-check-inline ">
+                        <div class="col-auto form-check " style="padding: 0">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="radio" name="doc" value="doc" id="doc"
+                                           aria-label="Radio button for following text input" onclick="my()"
+                                           onload="my()"> <span
+                                            class="text-sm-right bg-light font-weight-bolder"
+                                            style="margin-left: 3px;padding: 3px"> I'm a Doctor</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-auto form-check ">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="radio" name="doc" value="pat" id="usr"
+                                           aria-label="Radio button for following text input" onclick="my()"
+                                           onload="my()" checked> <span
+                                            class="text-sm-right bg-light font-weight-bolder"
+                                            style="margin-left: 3px;padding: 3px"> I'm a User</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding: 10px"></div>
+                    <div class="overflow-auto" style="max-height: 400px;padding: 15px">
+                        <label style="margin-bottom: 0;">First Name</label>
+                        <div class="input-group">
+                            <span class="fa fa-pencil" aria-hidden="true"></span>
+                            <input type="text" name="f_name" placeholder="Your First Name" required="">
+                        </div>
+
+                        <label style="margin-bottom: 0;">Last Name</label>
+                        <div class="input-group">
+                            <span class="fa fa-pencil" aria-hidden="true"></span>
+                            <input type="text" name="l_name" placeholder="Your Last Name" required="">
+                        </div>
+
+                        <label style="margin-bottom: 0;" for="gender">Gender</label>
+                        <div class="input-group">
+                            <span class="fa fa-user" aria-hidden="true" style="padding-right: 10px"></span>
+                            <!--<input type="text" name="l_name" placeholder="Your Gender" required="">-->
+                            <select class="form-control" id="gender" name="gender" style="border: 0">
+                                <option class="dropdown-item" value="Male">Male</option>
+                                <option class="dropdown-item" value="Female">Female</option>
+                                <!--<option class="dropdown-item" value="Other">Other</option>-->
+                            </select>
+                        </div>
+
+                        <label style="margin-bottom: 0;">Date Of Birth</label>
+                        <div class="input-group">
+                            <span class="fa fa-pencil" aria-hidden="true" style="padding-right: 10px"></span>
+                            <input type="date" name="dob" placeholder="date" required="" style="border: 0">
+                        </div>
+
+                        <label style="margin-bottom: 0;">Email</label>
+                        <div class="input-group">
+                            <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                            <input type="text" name="email" placeholder="Your Email Address" required="">
+                        </div>
+
+                        <label style="margin-bottom: 0;">Phone Number</label>
+                        <div class="input-group">
+                            <span class="fa fa-phone" aria-hidden="true"></span>
+                            <input type="text" name="phone" placeholder="Your Phone Number" pattern="[0-9]{10}" required="">
+                        </div>
+
+                        <label style="margin-bottom: 0;">Password</label>
+                        <div class="input-group">
+                            <span class="fa fa-lock" aria-hidden="true"></span>
+                            <input type="Password" name="pass" id="pass1" onblur="passMe()" placeholder="Enter Password" required="">
+                        </div>
+
+                        <label style="margin-bottom: 0;">Confirm Password</label> <span class="fa fa-thumbs-up text-success" id="up"></span>
+                        <div class="input-group">
+                            <span class="fa fa-lock" aria-hidden="true"></span>
+                            <input type="Password" name="re-pass" id="pass2" onblur="passMe()" oninput="passMe()" placeholder="Re Enter Password" required="">
+                        </div>
+
+
+                        <div id="for_doc">
+                            <label id="tite" style="margin-bottom: 0;"  class="font-weight-bold">For Doctors Only</label>
+                            <!--<label style="margin-bottom: 0;" id="doc_id1">Doctor ID</label>-->
+                            <div class="input-group" id="doc_id">
+                                <span class="fa fa-pencil-square" aria-hidden="true"></span>
+                                <input type="text" name="doc_id" id="doc_id" placeholder="Your Unique ID" >
+                            </div>
+
+                            <!--<label style="margin-bottom: 0;" for="cat" id="cat1">Category</label>-->
+                            <div class="input-group" id="cat">
+                                <span class="fa fa-user" aria-hidden="true" style="padding-right: 10px"></span>
+                                <select class="form-control" name="cat" id="cat" style="border: 0">
+                                    <option class="dropdown-item" value="category1">category1</option>
+                                    <option class="dropdown-item" value="category1">category2</option>
+                                    <!--<option class="dropdown-item" value="Other">Other</option>-->
+                                </select>
+                            </div>
+
+                            <!--<label style="margin-bottom: 0;" id="text2">About You</label>-->
+                            <div class="input-group" id="text1">
+                                <span class="fa fa-pencil-square" aria-hidden="true"></span>
+                                <!--<input type="text" name="doc_id" placeholder="Your Unique ID" required="">-->
+                                <textarea class="form-control" name="desc" id="desc" rows="2" placeholder="About You" style="border: 0"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button id="btn" class="btn btn-danger btn-block" type="submit">Register</button>
+                </form>
+
+
+                <script type="text/javascript">
+
+                    <% let ch_me=false;%>
+                    document.getElementById('up').hidden = true;
+                    document.getElementById('btn').disabled = true;
+                    function passMe() {
+                        var p1 = document.getElementById('pass1').value;
+                        var p2 = document.getElementById('pass2').value;
+                        if(p1===p2) {
+                            document.getElementById('up').hidden = false;
+                            ch_me=true;
+                            document.getElementById('btn').disabled = false;
+                        } else {
+                            ch_me=false;
+                            document.getElementById('up').hidden = true;
+                            document.getElementById('btn').disabled = true;
+                        }
+                    }
+
+                    const dd = document.getElementsByName('doc');
+                    for (const rb of dd) {
+                        if (rb.checked) {
+                            if (rb.value === 'doc') {
+                                // document.getElementById('text1').hidden = false;
+                                document.getElementById('for_doc').hidden = false;
+                                document.getElementById('tite').hidden = false;
+                                document.getElementById('desc').disabled = false;
+                                document.getElementById('doc_id').disabled = false;
+                                document.getElementById('cat').disabled = false;
+                            } else {
+                                document.getElementById('for_doc').hidden = true;
+                                document.getElementById('tite').hidden = true;
+                                document.getElementById('desc').disabled = true;
+                                document.getElementById('doc_id').disabled = true;
+                                document.getElementById('cat').disabled = true;
+
+                            }
+                        }
+                    }
+
+                    function my() {
+                        if (!document.getElementById('doc').checked) {
+                            document.getElementById('for_doc').hidden = true;
+                            document.getElementById('tite').hidden = true;
+                            document.getElementById('desc').disabled = true;
+                            document.getElementById('doc_id').disabled = true;
+                            document.getElementById('cat').disabled = true;
+                        } else {
+                            document.getElementById('for_doc').hidden = false;
+                            document.getElementById('tite').hidden = false;
+                            document.getElementById('desc').disabled = false;
+                            document.getElementById('doc_id').disabled = false;
+                            document.getElementById('cat').disabled = false;
+                        }
+                    }
+
+                </script>
+
+
+                <p class="account">By clicking register, you agree to our <a href="#">Terms & Conditions!</a></p>
+                <p class="account1">Already User? <a href="/login">Login Here</a></p>
+            </div>
+        </div>
+        <!-- //main content -->
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <p>&copy; 2020 DocHLp | Design by Archi, Zain and Naika </p>
+    </div>
+    <!-- footer -->
+</div>
+
+</body>
+</html>
